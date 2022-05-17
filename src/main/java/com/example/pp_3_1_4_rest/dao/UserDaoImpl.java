@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override
@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getByEmail(String email) {
         return entityManager.createQuery(
-                        "SELECT user FROM User user WHERE user.email =:email", User.class)
+                        "SELECT user FROM User user join fetch user.roles WHERE user.email =:email", User.class)
                 .setParameter("email", email)
                 .getSingleResult();
     }

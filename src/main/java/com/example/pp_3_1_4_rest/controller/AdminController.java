@@ -26,6 +26,6 @@ public class AdminController {
                         Model model) {
         User user = service.findByEmail(principal.getName());
         model.addAttribute("user", user);
-        return "users/admin";
+        return "/admin";
     }
 }
